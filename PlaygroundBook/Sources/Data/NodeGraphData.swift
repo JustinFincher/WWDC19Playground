@@ -197,7 +197,17 @@ public class NodeGraphData: NSObject
     {
         connection.inPort.connections.remove(connection)
         connection.outPort.connections.remove(connection)
-        singleNodes.insert(connection.inPort.node!)
+        if connection.inPort.connections.count == 0,
+            let outPorts : Array<NodePortData> = connection.inPort.node?.outPorts
+        {
+            let nodeOutConnectionCount = outPorts.compactMap { (nodePortData) -> Int in
+                nodePortData.connections.count
+                }.reduce(0, +)
+            if (nodeOutConnectionCount == 0)
+            {
+                singleNodes.insert(connection.inPort.node!)
+            }
+        }
         updateIndexNodeDataDict()
     }
     

@@ -10,7 +10,7 @@ import UIKit
 
 public class NodeEditorViewController: UIViewController, NodeListTableViewControllerSelectDelegate, NodeGraphViewDelegate, NodeGraphViewDataSource
 {
-    
+
     let nodeEditorData : NodeGraphData = NodeGraphData()
     let nodeEditorView : NodeGraphScrollView = NodeGraphScrollView(frame: CGRect.zero, canvasSize: CGSize.init(width: 2000, height: 2000))
     let loadingIndicator : UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
@@ -105,6 +105,10 @@ public class NodeEditorViewController: UIViewController, NodeListTableViewContro
     public func connectNode(outPort: NodePortData, inPort: NodePortData) -> Void
     {
         nodeEditorData.connectNode(outPort:outPort,inPort:inPort)
+    }
+    
+    public func breakConnection(connection: NodeConnectionData) {
+        nodeEditorData.breakConnection(connection: connection)
     }
     
     public func canConnectPointIn(graphView: NodeGraphView, nodeOutPort: CGPoint, nodeInPort: CGPoint) -> Bool

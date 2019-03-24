@@ -55,6 +55,8 @@ public class NodePortData: NSObject
             {
                 connection.outPort.connections.remove(connection)
             }
+            
+            connections.remove(connection)
         }
     }
     

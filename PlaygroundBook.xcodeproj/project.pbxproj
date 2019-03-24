@@ -363,10 +363,10 @@
 				0DE180EB2240AA7400B9D887 /* NodeGraphView.swift */,
 				0DE180EC2240AA7400B9D887 /* NodeValueCustomView.swift */,
 				0DE180ED2240AA7400B9D887 /* NodeGraphDrawRectView.swift */,
+				0DE180F12240AA7400B9D887 /* NodeGraphContainerView.swift */,
 				0DE180EE2240AA7400B9D887 /* NodeView.swift */,
 				0DE180EF2240AA7400B9D887 /* NodePortKnotView.swift */,
 				0DE180F02240AA7400B9D887 /* NodePortView.swift */,
-				0DE180F12240AA7400B9D887 /* NodeGraphContainerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

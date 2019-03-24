@@ -24,6 +24,7 @@ public protocol NodeGraphViewDataSource: AnyObject
     func delete(node: NodeData) -> Void
     func requiredViewController() -> NodeEditorViewController
     func allNodeData() -> Array<NodeData>
+    func breakConnection(connection : NodeConnectionData) -> Void
 }
 
 public class NodeGraphView: UIView, NodeGraphContainerViewDelegate

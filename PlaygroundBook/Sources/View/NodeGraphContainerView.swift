@@ -118,7 +118,8 @@ public class NodeGraphContainerView: UIView
         if let view = recognizer.view,
             view.isKind(of: NodePortKnotView.self),
             let knot : NodePortKnotView = view as? NodePortKnotView,
-            var portView : NodePortView = NodePortView.getSelfFromKnot(knot: knot)
+            var portView : NodePortView = NodePortView.getSelfFromKnot(knot: knot),
+            let originalPortView : NodePortView = portView
         {
             let point : CGPoint = recognizer.location(in: self)
             // when remove connection from in-port, portview.data.connection is 1 and portview is inport
@@ -136,9 +137,10 @@ public class NodeGraphContainerView: UIView
                 datasource?.selectedNodeCurrentInteractiveState(point: point, dragging: true, fromNode: portView)
                 break
             case .ended:
-                if shouldProxyingNodeInReverseDirection
+                if shouldProxyingNodeInReverseDirection,
+                    let connectionToRemove = originalPortView.data?.connections.first
                 {
-                    portView.data?.breakAllConnections()
+                    nodeGraphView?.dataSource?.breakConnection(connection: connectionToRemove)
                 }
                 if  let portViewToConnect = getPortViewFrom(point: point),
                     let portViewData = portView.data,
