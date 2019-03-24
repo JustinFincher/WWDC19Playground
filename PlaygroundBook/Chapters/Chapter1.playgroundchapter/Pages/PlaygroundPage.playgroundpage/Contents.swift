@@ -28,7 +28,7 @@
  4. If you want to see a cooler & more detailed example, just change the expression below to true and press the button to run.
  */
 
-// Change isPowerUpEnabled to true and press run code button
+// Change isPowerUpEnabled to true and press run code button, remember to wait for a while after pressing the button, as the node graph will create nodes and update itself.
 var isPowerUpEnabled = /*#-editable-code*/<#T##click to enable##Bool#>/*#-end-editable-code*/
 
 //#-hidden-code
@@ -49,6 +49,34 @@ if (isPowerUpEnabled)
 //#-end-hidden-code
 
 /*:
+ The node graph, which should have been updated after changing the power up expression to true, is now more complex (and fun). You can see multiply lines connection various nodes like 'smoothstep' and 'atan', they are all common functions in the shader world. The node graph now is a visual representation of the shader code below:
+ 
+ ````
+ #ifdef GL_ES
+ precision mediump float;
+ #endif
+ 
+ uniform vec2 u_resolution;
+ uniform float u_time;
+ uniform float u_audiodb;
+ 
+ void main()
+ {
+     vec2 st = gl_FragCoord.xy/u_resolution.xy;
+     vec2 pos = vec2(0.5)-st;
+     float r = length(pos)*2.0;
+     float a = atan(pos.y,pos.x);
+ 
+     float f = smoothstep(10.0 * (1.0 - u_audiodb)),0.5,sin(a * 5.0 + u_time) * 0.7 + cos(a * 7.0) * 1.0);
+     float s = smoothstep(0.0,2.0,f);
+     vec3 colorIn = vec3(1.0- smoothstep(s,s,r - 0.5));
+     vec3 colorOut = vec3(1.0- smoothstep(s,s,r - 0.2));
+     gl_FragColor = vec4(colorIn - colorOut, 1.0);
+ }
+ ````
+ 
+ And you can change parameters by editing some float generator nodes and giving it a new value, the node graph will update the shader to reflect your changes. Try it out!
+
  # About
  Shader+Node Swift Playground is a shader node editor demo made by ZHENG HAOTIAN (郑昊天).
  
